@@ -1,0 +1,22 @@
+<odoo>
+	<data>
+
+			    <record model="ir.ui.view" id="inherit_views_stock_location">
+                    <field name="name">inherit_views_stock_location</field>
+                    <field name="model">stock.location</field>
+                    <field name="inherit_id" ref="stock.view_location_form" />
+                    <field name="arch" type="xml">
+                        <xpath expr="//field[@name='usage']" position="before">
+                            <field name="is_approval" />
+                            <field name="user_id" invisible="is_approval == False" required="is_approval == True"/>
+                        </xpath>
+                    </field>
+                </record>
+
+
+
+
+
+
+	</data>
+</odoo>

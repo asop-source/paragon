@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    
+    <record id="view_mrp_production_form_custom" model="ir.ui.view">
+        <field name="name">mrp.production.form.custom</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_plan_production" type="object" string="Plan Production" class="oe_highlight"/>
+            </xpath>
+            <xpath expr="//sheet/group/group" position="after">
+                <group>
+                    <field name="estimated_production_time"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+
+
+</odoo>

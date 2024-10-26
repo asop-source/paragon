@@ -1,0 +1,52 @@
+<odoo>
+	<data>
+
+			    <record model="ir.ui.view" id="inherit_views_stock_quant">
+                    <field name="name">inherit_views_stock_quant</field>
+                    <field name="model">stock.quant</field>
+                    <field name="inherit_id" ref="stock.view_stock_quant_tree_inventory_editable" />
+                    <field name="arch" type="xml">
+                        <xpath expr="//field[@name='inventory_quantity']" position="after">
+                            <field name="is_approval" column_invisible="1" />
+                            <field name="is_validate" column_invisible="1" />
+                            <field name="is_done" column_invisible="1"/>
+                        </xpath>
+                        <xpath expr="//button[@name='action_apply_inventory']" position="replace">
+                            <!-- Tombol Apply -->
+                            <button name="action_apply_inventory" 
+                                    groups="stock.group_stock_manager" 
+                                    type="object" 
+                                    string="Apply" 
+                                    class="btn btn-link" 
+                                    icon="fa-save" 
+                                    invisible="not inventory_quantity_set or is_approval"/>
+
+                            <!-- Tombol Request -->
+                            <button name="action_apply_inventory" 
+                                    groups="stock.group_stock_manager" 
+                                    type="object" 
+                                    string="Request" 
+                                    class="btn btn-link" 
+                                    icon="fa-save" 
+                                    invisible="not inventory_quantity_set or not is_approval or is_done"/>
+
+                            <!-- Tombol Approved -->
+                            <button name="action_apply_inventory" 
+                                    groups="stock.group_stock_manager" 
+                                    type="object" 
+                                    string="Approved" 
+                                    class="btn btn-link" 
+                                    icon="fa-save" 
+                                    invisible="not inventory_quantity_set or not is_validate or not is_done"/>
+
+                        </xpath>
+                    </field>
+                </record>
+
+
+
+
+
+
+	</data>
+</odoo>

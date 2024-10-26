@@ -1,0 +1,49 @@
+<odoo>
+    <data>
+
+
+        <!-- Action untuk membuka Location Product Rules -->
+        <record id="action_location_product_rules" model="ir.actions.act_window">
+            <field name="name">Location Product Rules</field>
+            <field name="res_model">location.product.rules</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Define rules for allowed products in specific locations.
+                </p>
+            </field>
+        </record>
+
+        <!-- View untuk Location Product Rules (Form dan Tree) -->
+        <record id="view_location_product_rules_tree" model="ir.ui.view">
+            <field name="name">location.product.rules.tree</field>
+            <field name="model">location.product.rules</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="location_id"/>
+                    <field name="product_id"/>
+                    <field name="rule_name" string="Rule Name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_location_product_rules_form" model="ir.ui.view">
+            <field name="name">location.product.rules.form</field>
+            <field name="model">location.product.rules</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="location_id"/>
+                            <field name="product_id"/>
+                            <field name="rule_name" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="menu_location_product_rules" name="Location Product Rules" parent="stock.menu_warehouse_config"
+            sequence="3" action="action_location_product_rules" groups="base.group_system"/>
+    </data>
+</odoo>

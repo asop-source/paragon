@@ -1,0 +1,40 @@
+<odoo>
+	<data>
+
+			    <record model="ir.ui.view" id="inherit_views_stock_picking">
+                    <field name="name">inherit_views_stock_picking</field>
+                    <field name="model">stock.picking</field>
+                    <field name="inherit_id" ref="stock.view_picking_form"/>
+                    <field name="arch" type="xml">
+                        <xpath expr="//button[@name='button_validate'][2]" position="replace"/>
+                        <xpath expr="//button[@name='action_cancel']" position="replace"/>
+                        <xpath expr="//button[@name='button_validate']" position="replace">
+                            <button name="button_validate" invisible="state != 'approved' or is_validate == False" 
+                                string="Approved" type="object" class="oe_highlight" groups="stock.group_stock_user" data-hotkey="v"/>
+                            <button name="action_back_process" invisible="state != 'approved' or is_validate == False" 
+                                string="Rejected" type="object" groups="stock.group_stock_user" />
+                            <button name="button_validate" invisible="state in ('draft','approved', 'confirmed', 'done', 'cancel')" string="Validate" type="object" class="oe_highlight" groups="stock.group_stock_user" data-hotkey="v"/>
+                            <button name="button_validate" invisible="state in ('waiting','approved', 'assigned', 'done', 'cancel')" string="Validate" type="object" groups="stock.group_stock_user" class="o_btn_validate" data-hotkey="v"/>
+
+                        </xpath>
+                        <xpath expr="//field[@name='origin']" position="after">
+                            <field name="is_approval" invisible="1"/>
+                            <field name="is_validate" invisible="1"/>
+                        </xpath>
+                        <xpath expr="//header/field[@name='state'][2]" position="replace"/>
+                        <xpath expr="//header/field[@name='state']" position="replace">
+                                <field name="state" widget="statusbar" invisible="picking_type_code != 'incoming' or is_approval" statusbar_visible="draft,assigned,done"/>
+                                <field name="state" widget="statusbar" invisible="picking_type_code == 'incoming' or is_approval" statusbar_visible="draft,confirmed,assigned,done"/>
+                                <field name="state" widget="statusbar" invisible="picking_type_code != 'incoming' or not is_approval" statusbar_visible="draft,assigned,approved,done"/>
+                                <field name="state" widget="statusbar" invisible="picking_type_code == 'incoming' or not is_approval" statusbar_visible="draft,confirmed,assigned,approved,done"/>
+                        </xpath>
+                    </field>
+                </record>
+
+
+
+
+
+
+	</data>
+</odoo>
